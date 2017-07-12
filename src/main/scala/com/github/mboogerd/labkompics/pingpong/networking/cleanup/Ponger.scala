@@ -1,9 +1,9 @@
 package com.github.mboogerd.labkompics.pingpong.networking.cleanup
 
-import com.github.mboogerd.labkompics.pingpong.networking.cleanup.model.TAddress
+import com.github.mboogerd.labkompics.pingpong.networking.cleanup.model.{TAddress, TMessage}
 import org.log4s._
-import se.sics.kompics.network.Network
-import se.sics.kompics.{ComponentDefinition, Handler, Positive}
+import se.sics.kompics.network.{Network, Transport}
+import se.sics.kompics.{ClassMatchedHandler, ComponentDefinition, Positive}
 
 /**
   *
@@ -20,11 +20,12 @@ class Ponger(init: Ponger.Init) extends ComponentDefinition {
 
   private var counter: Long = 0L
 
-  val pingHandler = new Handler[Ping] {
-    override def handle(e: Ping): Unit = {
+  val pingHandler = new ClassMatchedHandler[Ping, TMessage]() {
+
+    override def handle(v: Ping, e: TMessage): Unit = {
       counter += 1
       log.info(s"Got Ping #$counter!")
-      trigger(new Pong(self, e.getSource), net)
+      trigger(TMessage(init.self, e.getSource, Transport.TCP, Pong()), net)
     }
   }
 

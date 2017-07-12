@@ -3,11 +3,11 @@ package com.github.mboogerd.labkompics.pingpong.networking.cleanup
 import java.net.InetAddress
 
 import com.github.mboogerd.labkompics.pingpong.networking.cleanup.conf.ConfigReaders
-import com.github.mboogerd.labkompics.pingpong.networking.cleanup.serialization.SerializerSetup
 import com.github.mboogerd.labkompics.pingpong.networking.cleanup.model.TAddress
+import com.github.mboogerd.labkompics.pingpong.networking.cleanup.serialization.SerializerSetup
 import org.log4s.getLogger
-import se.sics.kompics.Kompics
 import pureconfig._
+import se.sics.kompics.Kompics
 /**
   *
   */

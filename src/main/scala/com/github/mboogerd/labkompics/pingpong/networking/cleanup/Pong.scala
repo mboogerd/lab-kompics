@@ -1,12 +1,8 @@
 package com.github.mboogerd.labkompics.pingpong.networking.cleanup
 
-import com.github.mboogerd.labkompics.pingpong.networking.cleanup.model.{TAddress, THeader, TMessage}
-import se.sics.kompics.network.Transport
+import se.sics.kompics.KompicsEvent
 
 /**
   *
   */
-object Pong {
-  def apply(header: THeader): Pong = new Pong(header.getSource, header.getDestination)
-}
-class Pong(src: TAddress, dst: TAddress) extends TMessage(src, dst, Transport.TCP)
+case class Pong() extends KompicsEvent
